@@ -7,3 +7,5 @@ output/
 *.out
 *.dll
 *.log
+python.py
+练习.py
