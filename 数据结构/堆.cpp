@@ -1,32 +1,31 @@
 #include<iostream>
+#include<vector>
 #include<algorithm>
+/*以小根堆举例*/
+const int N=1*5+5;
+int h[N],size;
 using namespace std;
-
-//以小根堆为例，有关堆排序请参考BILIBILI视频
-
-int h[10000],size;
-
 void down(int u){
-    int t=u;
-    if(u*2<=size && h[u*2]<h[t]) t=u*2;
-    if(u*2+1<=size && h[u*2+1]<h[t]) t=u*2;
-    if(t!=u){
-        swap(h[u],h[t]);
+    int t;
+    if(u*2<size && h[u*2]<h[t]) t=u*2;
+    if(u*2+1<size && h[u*2+1]<h[t]) t=u*2+1;
+    if(h[t]<h[u]){
+        swap(h[t],h[u]);
         down(t);
     }
 }
 
 void up(int u){
-    while(u/2 && h[u/2]>h[u]){
-        swap(h[u/2],h[u]);
-        u/=2;
+    while(u!=0 && h[u/2]<h[u]){
+        swap(h[u],h[u/2]);
+        u=u/2;
     }
 }
 
-int main(){
 
-}
-//插入一个数：h[++size]=x;up[x];
-//求最小值：h[1]
-//删除任意值：h[k]=h[size];size--;down(k);up[k];
-//修改任意值：h[k]=x;down(k);up(k);
+/*
+1.加入新元素，h[++size]=x,up(size);
+2.删除元素,h[k]=h[size],size--,down(k),up(k)
+3.修改元素,h[k]=x,down(k),up(k);
+
+*/
