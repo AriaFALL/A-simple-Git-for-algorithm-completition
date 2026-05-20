@@ -11,30 +11,42 @@
 using namespace std;
 
 signed main(){
-    int t;cin>>t;
+    int t;
+    cin>>t;
     while(t--){
-        int n,k;cin>>n>>k;
-        vt<int> op;
-        for(int i=0;i<n;i++){
-            cin>>op[i];
-        }
-        sort(op.begin(),op.end());
+        string s;
+        cin>>s;
         int res=0;
-        int las=0;
-        for(int i=1;i<n;i++){
-            if(op[i]==op[i-1]+1){
-                las++;
+        int n=s.size();
+        vt<int> sh(n,0);
+        vt<int> xi(n,0);
+        for(int i=0;i<s.size();i++){
+            if(res==0){
+                if(s[i]=='1' || s[i]=='3') res=1;
             }else{
-                while(las>0){
-                    res+=las/2;
-                    las=las/2;
-                }
+                if(s[i]=='2') sh[i]=sh[i-1]+1;
+                else if(s[i]=='1' ||s[i]=='3')sh[i]=sh[i-1];
             }
         }
-        while(las>0){
-                    res+=las/2;
-                    las=las/2;
-                }
-        cout<<res<<endl;
-    }   
+        res=0;
+        for(int i=n-1;i>=0;i--){
+            if(res==0){
+                if(s[i]=='2') res=1;
+            }else{
+                 if(s[i]=='1' || s[i]=='3') xi[i]=xi[i+1]+1;
+                else if(s[i]=='2')xi[i]=xi[i+1];
+            }
+        }
+        res=0;
+        for(char c:s){
+            if(c=='4') res++;
+        }
+        int result=1e9+5;
+        for(int i=0;i<n-1;i++){
+            result=min(result,sh[i]+xi[i+1]);
+        }
+        cout<<res<<" "<<result;
+        if(result=1e9+5) cout<<0+res<<endl;
+        else cout<<result+res<<endl;
+    }
 }

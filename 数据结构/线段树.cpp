@@ -64,5 +64,5 @@ void updatarange(const vector<int> &data,vector<node> &tree,int rt,int left,int 
     int mid=(left+right)/2;
     updatarange(data,tree,rt*2,left,mid,ul,ur,value);
     updatarange(data,tree,rt*2+1,mid+1,right,ul,ur,value);
-    tree[rt].data=max(tree[rt*2].data,tree[rt*2+1].data);
+    tree[rt].data=max(tree[rt*2].data,tree[rt*2+1].data);/*回溯时重新计算节点值，防止错误更新不该更新的值*/
 }
