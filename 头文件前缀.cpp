@@ -1,4 +1,9 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+
+#define ull unsigned long long
 #define int long long
 #define endl "\n"
 #define vt vector

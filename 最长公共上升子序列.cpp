@@ -21,10 +21,10 @@ int main(){
             if(b[j-1]==a[i-1]){
                 dp[i][j]=val+1;
             }else{
-                dp[i][j]=dp[i-1][j];
+                dp[i][j]=max(dp[i-1][j],dp[i][j]);
             }
 
-            if(b[j]<a[i]){
+            if(b[j-1]<a[i-1]){
                 val=max(dp[i-1][j],val);
             }
         }

@@ -1,46 +1,31 @@
-#include<iostream>
-#include<vector>
-#include<string>
-#include<algorithm>
-
-
+#include<bits/stdc++.h>
 #define int long long
 #define endl "\n"
 #define vt vector
 #define pb push_back
 using namespace std;
 
-int dfs(int i,vt<vt<int>> &rt,vt<bool> &vst,int len){
-    vst[i]=true;
-    int maxs=0;
-    for(int j:rt[i]){
-            if(!vst[j]){
-                vst[j]=true;
-                maxs=max(maxs,dfs(j,rt,vst,len+1));
-            }
-    }
-    return maxs+1;
-}
-
-signed main() {
+signed main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int n; cin >> n;
-    vt<vt<int>> rt(n,vt<int>(n));
-    vt<int> ne(n,0);
-    int m = n - 1;          
-    while (m--) {
-        int a, b; cin >> a >> b;
-        ne[a]++,ne[b]++;
-        rt[a].pb(b);
-        rt[b].pb(a);
-    }
-    int maxs=0;
-    for(int i=1;i<n;i++){
-        if(ne[i]==1){
-            vt<bool> vst(n,false);
-            maxs=max(maxs,dfs(i,rt,vst,0));
+    int n;
+    cin>>n;
+    vt<int> x(n+5);
+    vt<int> y(n+5);
+    int cnt=0;
+    for(int i=0;i<n;i++){
+      cin>>x[i]>>y[i];
+      int res=0;
+      for(int j=0;j<i;j++){
+        int ret=(y[i]>y[j])+(x[i]>x[j]);
+        if(ret==2){
+          res=1;
+          break;
         }
+      }
+      if(!res){
+        cnt++;
+      }
     }
-    cout<<maxs;
+    cout<<cnt;
 }

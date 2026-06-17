@@ -6,9 +6,9 @@ const int N=1*5+5;
 int h[N],size;
 using namespace std;
 void down(int u){
-    int t;
-    if(u*2<size && h[u*2]<h[t]) t=u*2;
-    if(u*2+1<size && h[u*2+1]<h[t]) t=u*2+1;
+    int t=u;
+    if(u*2<=size && h[u*2]<h[t]) t=u*2;
+    if(u*2+1<=size && h[u*2+1]<h[t]) t=u*2+1;
     if(h[t]<h[u]){
         swap(h[t],h[u]);
         down(t);
@@ -16,7 +16,7 @@ void down(int u){
 }
 
 void up(int u){
-    while(u!=0 && h[u/2]<h[u]){
+    while(u/2!=0 && h[u/2]>h[u]){
         swap(h[u],h[u/2]);
         u=u/2;
     }
