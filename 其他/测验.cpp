@@ -1,66 +1,68 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include<functional>
-using namespace std;
+#include<bits/stdc++.h>
 #define int long long
-const int INF = 1e9+5;
+#define endl "\n"
 #define vt vector
-#define PII pair<int,int>
+#define pb push_back
+using namespace std;
 
-signed main() {
+const int mod=998244353;
+ 
+bool match(string &s,char c,char d){ 
+   if(c=='?' && d=='?'){
+       return true;
+   }else if(c=='?' && d!='?'){
+       return d==s[1];
+   }else if(d=='?' && c!='?'){
+       return c==s[0];
+   }else{
+       string s1=c+d;
+       return s1==s;
+   }
+}
+
+
+signed main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int n, m, y;
-    int start=1;
-    if (!(cin >> n >> m >> y)) return 0;
-
-    vector<vector<PII>> adj(n+1);
-    for (int i = 0; i < m; ++i) {
-        int u, v, w;
-        cin >> u >> v >> w;
-        adj[u].push_back({v, w});
-        adj[v].push_back({u, w});
+    
+    //int t;cin>>t;while(t--){
+    //
+    int n;cin>>n;
+    vt<char> a(n+5);
+    vt<char> b(n+5);
+    
+    for(int i=1;i<=n;i++) cin>>a[i];
+    for(int i=1;i<=n;i++) cin>>b[i];
+    
+    vt<int> dp(4);
+    vt<int> ndp(4);
+    
+    for(int j=0;j<4;j++){
+        char c=j%2+'0';
+        char d=j%1+'0';
+        string s=a[1]+b[1];
+        if(match(s,a[1],b[1])){
+            dp[j]=1;
+        }
     }
-    vt<int> x(n+1);
-    for(int i=1;i<=n;i++){
-      cin>>x[i];
-      adj[i].push_back({0,x[i]});
-      adj[0].push_back({i,x[i]+y});
-    }
-    vector<int> dist(n+1, INF);
-  
-    vector<bool> st(n+1, false);
-
-    priority_queue <PII,vector<PII>,greater<PII>> heap;
-
-    dist[start] = 0;
-    heap.push({0, start});
-
-    while (!heap.empty()) {
-        auto [d, u] = heap.top();
-        heap.pop();
-
-        if (st[u]) continue;
-        st[u] = true;
-        for (auto& edge : adj[u]) {
-            int v = edge.first;
-            int w = edge.second;
-            if (dist[v] > dist[u] + w) {
-                dist[v] = dist[u] + w;
-                heap.push({dist[v], v}); 
+    
+    for(int i=2;i<=n;i++){
+        string s=a[i-1]+b[i-1];
+        for(int j=0;j<4;j++){
+            char c=j%2+'0';
+            char d=j%1+'0';
+            ndp[j]=0;
+            string s1=c+d;
+            if(match(s,a[i],b[i])){
+                for(int k=0;k<4;k++){
+                    if(k!=j) ndp[j]=(dp[k]%mod+ndp[j])%mod;
+                }
             }
         }
+        dp[0]=ndp[0];dp[1]=ndp[1];dp[2]=ndp[2];dp[3]=ndp[3];
+        
     }
-
-    for (int i = 2; i <= n; ++i) {
-        if (dist[i] == INF) {
-            cout <<x[1]+y+x[i]<< " ";
-        } else {
-            cout <<min(x[1]+x[i]+y,dist[i])<< " ";
-        }
-    }
-
-
+    
+    cout<<ndp[0]+ndp[1]+ndp[2]+ndp[3];
     return 0;
 }

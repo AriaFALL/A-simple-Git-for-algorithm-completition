@@ -3,13 +3,13 @@
 #include <queue>
 
 using namespace std;
-
+#define int long long
 // 定义无穷大
-const int INF = 1e9;
+const int INF = 4e18;
 // 这样优先队列默认就会按照距离从小到大排序
 #define PII pair<int,int>
 
-int main() {
+signed main() {
     // 优化标准 I/O 操作速度 (OJ 必备)
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
