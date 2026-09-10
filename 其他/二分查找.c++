@@ -27,11 +27,12 @@ int main(){
 
 //寻找第一个>=x的数。
 
-while (l<r){
+while (l<=r){
     int mid=(l+r)/2;
-    if(a[mid]<target){
+    if(a[mid]<=target){ /*确认为往右边寻找答案*/
         l=mid+1;
+        mid=res;
     }else {
-        r=mid;
+        r=mid-1;
     }
 }
