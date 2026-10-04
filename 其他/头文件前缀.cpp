@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 #define int long long
-//#define endl "\n" /*交互题不可用\n，需要删除此行*/
+#define endl "\n" /*交互题不可用\n，需要删除此行*/
 #define vt vector
 #define pb push_back
 #define pii pair<int,int>
