@@ -15,9 +15,9 @@ long long int quick_mi(int b,int op,long long M){
     }
     return result % M;
 }
-long long int quick_mi_digui (long long a,int op){
+long long int quick_mi_digui (long long a,int op,int mod){
     if(op==1) return a;
-    long long int git =quick_mi_digui (a, op/2);
-    if(op%2==1) return git*git*a;
-    else return git*git;
+    long long int git =quick_mi_digui (a, op/2,mod)%mod;
+    if(op%2==1) return ((git*git)%mod*a)%mod;
+    else return (git*git)%mod;
 }
