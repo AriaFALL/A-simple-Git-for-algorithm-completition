@@ -6,6 +6,8 @@
 #define pii pair<int,int>
 using namespace std;
 
+const int mod=4e18;
+
 signed main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
