@@ -3,7 +3,7 @@
 using namespace std;
 
 const int N=10010;
-
+/*cpp不能用N定义数组*/
 int son[N][26],cnt[N],idx=0;
 //p->父节点的idx，son[p][u]->代号，cnt->对应长度bool值
 void insert(string op){
